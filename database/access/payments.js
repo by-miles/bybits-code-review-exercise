@@ -17,5 +17,25 @@ const savePayment = async ({payment, paymentId, status}) => {
 
 };
 
+const fetchUnpaid = async (policyReference) =>{
 
-module.exports = { savePayment };
+    console.log('fetching failed payments for:', policyReference);
+
+    const result = await knex('payments').where('policy_reference', policyReference);
+    
+    if (result.length > 0){
+        
+        console.log('failed payments exist for:', policyReference);
+
+        console.log(result[0]);
+        
+        return result[0];
+    }
+
+    console.log('no failed payments found', policyReference);
+    
+    return null;
+    
+};
+
+module.exports = { savePayment, fetchUnpaid };
