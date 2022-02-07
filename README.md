@@ -1,12 +1,11 @@
 # Code Review Exercise
-
 ## The Task
 
-Perform a code review of the current [pull request](https://github.com/bymiles-tech/code-review-exercise/pull/1).
+Perform a code review of the current [pull request](https://github.com/bymiles-tech/code-review-exercise/pull/2).
 
 The scope of this task is to focus on the new feature developed, which is a new API endpoint `GET /unpaid`.
 
-The `GET /unpaid` should return a list of any failed or unpaid payments based on one or many policy references.
+The `GET /unpaid` should return a list of any failed or unpaid payments based on one or many policy references. (A policy reference is a unique )
 
 It should query the sql table `payments` (see the [Payments schema table](#payments-schema-table) below) and find the relevant policies, where is has status of `failed`.
 
@@ -37,7 +36,25 @@ GET /unpaid?policy_reference=c5de0924-0c0e-4695-8117-045e948fc390,7fb2109e-3559-
 }]
 ```
 
+## How to Submit
+* Create a document specifying line numbers and comments with regards to the code review. See example below.
+* You can spend as much, or as little time, as you feel relevant, or comfortable for this task.
+* Please use your style of language to communicate any comments with regards to the code review.
+* Please state how much time you spent reviewing the code in the document.
+* In the event of uncertainty, feel free to make any assumptions and mention them in the document.
+* Send the document back for us to review.
 
+Best of luck.
+
+Example of submission:
+
+```
+Time spent: [insert duration here]
+
+Line 20: There appears to be a typo in....
+Line 30-33: This code block appears to be...
+etc...
+```
 ### Background context
 
 Please note that this api is a contrived example of a real world application.
@@ -86,7 +103,7 @@ A sqlite database is used and the following `payments` table schema can be seen 
 
 ## Setup
 
-These steps are not necessary for the code review. But useful, if you wish to have this setup locally.
+These steps are not necessary for the code review. But useful, if you wish to pull and have a look at the solution locally.
 
 
 1. Install modules
@@ -124,21 +141,3 @@ To start the api locally:
 npm start
 ```
 
-## How to Submit
-* Create a document specifying line numbers and comments with regards to the code review. See example below.
-* You can spend as much, or as little time, as you feel relevant, or comfortable for this task.
-* Please use your style of language to communicate any comments with regards to the code review.
-* Please state how much time you spent reviewing the code in the document.
-* In the event of uncertainty, feel free to make any assumptions and mention them in the document.
-
-Best of luck.
-
-Example of submission:
-
-```
-Time spent: [insert duration here]
-
-Line 20: There appears to be a typo in....
-Line 30-33: This code block appears to be...
-etc...
-```
