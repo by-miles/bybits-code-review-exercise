@@ -3,9 +3,13 @@ const main = require('./main');
 
 module.exports = async (req, res) => {
 
-    main();
+    const policyReferenceFromQuery = req.query['policy_reference'];
 
-    res.status(500).send({msg: 'not yet implemented'});
+    const policyReferences = policyReferenceFromQuery.split(',');
+
+    const failedPayments = await main(policyReferences);
+
+    res.send(failedPayments);
 
 
 };

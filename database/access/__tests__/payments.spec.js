@@ -1,6 +1,7 @@
-
 const { v4: uuidv4 } = require('uuid');
-const { savePayment } = require('../../access/payments');
+const { savePayment, fetchUnpaid } = require('../../access/payments');
+const dayjs = require('dayjs');
+const knex = require('../../index');
 
 
 describe('Making payments', ()=>{
@@ -32,3 +33,33 @@ describe('Making payments', ()=>{
     });
 });
 
+describe('Fetching failed payments', ()=>{
+
+    it('Can fetch failed payments', async () => {
+        
+        const failedPayment = {
+            policy_reference: uuidv4(),
+            payment_id: uuidv4(),
+            amount: 15.21,
+            status: 'failed',
+            error_message: 'test failure',
+            error_code: 431,
+            created_at: dayjs().toISOString(),
+            updated_at: dayjs().toISOString()
+        };
+
+        // insert fake failed payment
+        await knex('payments').insert(failedPayment);
+
+        // fetch failed payment
+        const failedPaymentResult = await fetchUnpaid(failedPayment.policy_reference);
+
+        // make assertion
+        expect(failedPaymentResult).toEqual(expect.objectContaining({
+            ...failedPayment, 
+            created_at: expect.anything(), 
+            updated_at: expect.anything() 
+        }));
+        
+    });
+});
